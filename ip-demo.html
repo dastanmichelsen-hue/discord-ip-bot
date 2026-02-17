@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your IP demo</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 24px 32px;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(15,23,42,0.8);
+    }
+    h1 {
+      margin-bottom: 8px;
+      font-size: 22px;
+    }
+    p {
+      margin: 6px 0;
+      font-size: 14px;
+      color: #9ca3af;
+    }
+    #ip {
+      font-size: 20px;
+      margin-top: 12px;
+      color: #f97316;
+      font-weight: 600;
+    }
+    #status {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Your IP address</h1>
+    <p>This page only shows your IP to <b>you</b> in your browser.</p>
+    <p>No data is saved or sent anywhere else.</p>
+    <div id="ip">Fetching your IP…</div>
+    <div id="status"></div>
+  </div>
+
+  <script>
+    async function showIp() {
+      const ipEl = document.getElementById("ip");
+      const statusEl = document.getElementById("status");
+      try {
+        const res = await fetch("https://api64.ipify.org?format=json");
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json(); // { ip: "x.x.x.x" }
+        ipEl.textContent = data.ip;
+        statusEl.textContent = "";
+      } catch (err) {
+        console.error(err);
+        ipEl.textContent = "Could not fetch your IP.";
+        statusEl.textContent = "Try disabling VPN/adblock or reloading the page.";
+      }
+    }
+    showIp();
+  </script>
+</body>
+</html>
+
