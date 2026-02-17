@@ -44,7 +44,7 @@ client.on("interactionCreate", async (interaction) => {
       `If you don't want that, just ignore this message.`;
 
     // TODO: replace with your real demo page URL later
-  const demoUrl = "https://dastanmichelsen-hue.github.io/ip-demo/";
+  const demoUrl = "https://dastanmichelsen-hue.github.io/discord-ip-bot/";
 
     try {
       await target.send({
